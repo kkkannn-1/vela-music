@@ -1,0 +1,98 @@
+<template>
+  <div class="volume">
+    <div class="volume-bar-container">
+      <image class="action-icon" src="/common/icon/minus.png" onclick="changeVolume(-1)"></image>
+      <div class="volume-progress-container">
+        <progress class="volume-progress"  percent="{{volume}}"></progress>
+      </div>
+      <image class="action-icon" src="/common/icon/plus.png" onclick="changeVolume(1)"></image>
+    </div>
+    <div class="cancel-container">
+      <image class="action-icon" src="/common/icon/cancel.png" onclick="goBack"></image>
+    </div>
+  </div>
+</template>
+  
+<script>
+import router from '@system.router';
+import audio from '@system.audio';
+
+export default {
+  data: {
+    volume: 0
+  },
+
+  onInit() {
+    this.volume = audio.volume * 100;
+  },
+
+  changeVolume(dir) {
+    if(dir === -1){
+      if(this.volume < 10) {
+        this.volume = 0;
+      }else {
+        this.volume -= 10;
+      }
+    }else {
+      if(this.volume > 90) {
+        this.volume = 100;
+      }else {
+        this.volume += 10;
+      }
+    }
+    audio.volume = this.volume / 100;
+  },
+
+  goBack() {
+    router.back();
+  }
+}
+</script>
+
+<style>
+.volume {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.volume-bar-container {
+  width: 440px;
+  height: 140px;
+  padding: 0 8px;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #2A2A2A;
+  border-radius: 70px;
+}
+
+.action-icon{
+  width: 60px;
+  height: 60px;
+}
+
+.volume-progress-container{
+  width: 220px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.volume-progress {
+  color: #3a40ff;
+  stroke-width: 30px;
+  layer-color: rgba(255, 255, 255, 0.1);
+}
+
+.cancel-container {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  bottom: 18px;
+  justify-content: center;
+  align-items: center;
+  background-color: #2D2D2D;
+  border-radius: 50%;
+}
+</style>
