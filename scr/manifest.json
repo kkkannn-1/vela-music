@@ -1,0 +1,37 @@
+{
+  "package": "com.kkkannn.music",
+  "name": "音乐",
+  "versionName": "1.2.0",
+  "versionCode": 1,
+  "minPlatformVersion": 1000,
+  "icon": "/common/logo.png",
+  "deviceTypeList": [
+    "watch"
+  ],
+  "features": [
+    {
+      "name": "system.router"
+    },
+    {
+      "name": "system.audio"
+    }
+  ],
+  "config": {
+    "logLevel": "log",
+    "designWidth": 480
+  },
+  "router": {
+    "entry": "pages/player",
+    "pages": {
+      "pages/player": {
+        "component": "player"
+      },
+      "pages/volume": {
+        "component": "volume"
+      },
+      "pages/list": {
+        "component": "list"
+      }
+    }
+  }
+}
